@@ -32,7 +32,10 @@ apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 # Allow current user to use docker without sudo
 usermod -aG docker ${USERNAME} 
 
+chown 1000:1000 -R /mnt/logs_volume
+
 # Pull and run graylog
 git clone https://github.com/krakish/graylog-test.git
 cd graylog-test
 docker compose up -d
+
