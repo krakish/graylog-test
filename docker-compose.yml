@@ -24,7 +24,7 @@ services:
         soft: 65536
         hard: 65536
     volumes:
-      - "os_data:/usr/share/opensearch/data"
+      - "/mnt/logs_volume/:/usr/share/opensearch/data"
     restart: "on-failure"
 
   graylog:
@@ -50,7 +50,7 @@ services:
     - "5140:5140/tcp"   # Syslog
     - "5555:5555/tcp"   # RAW TCP
     - "5555:5555/udp"   # RAW TCP
-    - "9000:9000/tcp"   # Server API
+    - "80:9000/tcp"   # Server API
     - "12201:12201/tcp" # GELF TCP
     - "12201:12201/udp" # GELF UDP
     #- "10000:10000/tcp" # Custom TCP port
@@ -64,6 +64,6 @@ services:
 
 volumes:
   mongodb_data:
-  os_data:
+  # os_data:
   graylog_data:
   graylog_journal:
