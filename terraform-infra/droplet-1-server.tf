@@ -10,7 +10,7 @@ resource "digitalocean_firewall" "droplet-1-firewall" {
 
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "9000"
+    port_range       = "443"
     source_addresses = ["0.0.0.0/0"]
   }
 
@@ -34,12 +34,12 @@ resource "digitalocean_tag" "droplet-1-tag" {
 
 resource "digitalocean_droplet" "droplet-1" {
   image      = "ubuntu-22-04-x64"
-  name       = "droplet-1"
+  name       = "graylog-server"
   region     = "fra1"
   size       = "s-2vcpu-4gb"
   vpc_uuid   = resource.digitalocean_vpc.test-vpc.id
   ssh_keys   = [data.digitalocean_ssh_key.wind-key.id]
-  user_data  = file("./user-data-docker.sh")
+  user_data  = file("./server-user-data-docker.sh")
   monitoring = true
   tags       = [digitalocean_tag.droplet-1-tag.id]
 }

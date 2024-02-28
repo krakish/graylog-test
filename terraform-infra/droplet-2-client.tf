@@ -22,12 +22,12 @@ resource "digitalocean_tag" "droplet-2-tag" {
 
 resource "digitalocean_droplet" "droplet-2" {
   image    = "ubuntu-22-04-x64"
-  name     = "droplet-2"
+  name     = "client"
   region   = "fra1"
-  size     = "s-1vcpu-512mb-10gb"
+  size     = "s-1vcpu-1gb"
   vpc_uuid = resource.digitalocean_vpc.test-vpc.id
   ssh_keys = [data.digitalocean_ssh_key.wind-key.id]
-  user_data = file("./user-data-docker.sh")
+  user_data = file("./client-user-data.sh")
   monitoring = true
   tags       = [digitalocean_tag.droplet-2-tag.id]
 }
